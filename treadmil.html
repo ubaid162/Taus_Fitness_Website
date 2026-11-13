@@ -1,0 +1,305 @@
+<!-- TREADMILL SECTION: loaded into index.html by the existing section loader -->
+<section id="treadmills-content" aria-labelledby="tm-title">
+  <style>
+    #treadmills-content {
+      --tm-gold: #f7c766;
+      --tm-gold-light: #ffda8a;
+      --tm-black: #080909;
+      --tm-text: #f7f7f8;
+      --tm-muted: #c8cbd1;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0 0 12px;
+      background: var(--tm-black);
+      color: var(--tm-text);
+      font-family: inherit;
+      scroll-margin-top: 100px;
+      border: 3px solid #f7c766;
+      border-top : 1px solid #f7c766;
+      border-bottom : 1px solid #f7c766;
+      border-radius: 15px;
+    }
+
+    #treadmills-content * { box-sizing: border-box; }
+
+    #treadmills-content .tm-hero {
+      position: relative;
+      width: 100%;
+      height: clamp(230px, 67vw, 500px);
+      max-height: 48vh;
+      min-height: 230px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      background: #101010;
+    }
+
+    #treadmills-content .tm-hero img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      object-fit: cover;
+      object-position: center 48%;
+    }
+
+    #treadmills-content .tm-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.03) 35%,
+        rgba(0,0,0,.34) 65%,
+        rgba(0,0,0,.92) 100%
+      );
+    }
+
+    #treadmills-content .tm-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      margin: -48px auto 0;
+      padding: 0 14px;
+      text-align: center;
+    }
+
+    #treadmills-content .tm-eyebrow {
+      display: inline-block;
+      margin: 0 auto 7px;
+      padding: 5px 10px;
+      border: 1px solid rgba(247,199,102,.6);
+      border-radius: 4px;
+      color: var(--tm-gold-light);
+      background: rgba(8,9,9,.76);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      line-height: 1.35;
+    }
+
+    #treadmills-content .tm-title {
+      margin: 0 auto 7px;
+      max-width: 900px;
+      color: #fff;
+      font-size: clamp(28px, 6.4vw, 58px);
+      font-weight: 850;
+      letter-spacing: -1.7px;
+      line-height: 1.05;
+      text-wrap: balance;
+      text-shadow: 0 3px 22px rgba(0,0,0,.72);
+    }
+
+    #treadmills-content .tm-title span { color: var(--tm-gold-light); }
+
+    #treadmills-content .tm-intro {
+      max-width: 760px;
+      margin: 0 auto 13px;
+      color: var(--tm-muted);
+      font-size: clamp(12px, 2.2vw, 18px);
+      font-weight: 450;
+      line-height: 1.5;
+      text-wrap: balance;
+    }
+
+    #treadmills-content .tm-benefits {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto 12px;
+      text-align: left;
+    }
+
+    #treadmills-content .tm-card {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      align-items: start;
+      gap: 10px;
+      min-width: 0;
+      min-height: 96px;
+      padding: 12px 11px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(20,21,23,.94), rgba(12,13,14,.96));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    #treadmills-content .tm-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid var(--tm-gold);
+      border-radius: 11px;
+      color: var(--tm-gold-light);
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    #treadmills-content .tm-card h3 {
+      margin: 1px 0 4px;
+      color: #fff;
+      font-size: clamp(12px, 2.1vw, 19px);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    #treadmills-content .tm-card p {
+      margin: 0;
+      color: var(--tm-muted);
+      font-size: clamp(10px, 1.7vw, 15px);
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    #treadmills-content .tm-enquire {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 980px;
+      min-height: 54px;
+      margin: 0 auto;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 16px;
+      background: linear-gradient(105deg, #ffda8a 0%, #eab34f 58%, #c98a2e 100%);
+      color: #090909;
+      box-shadow: 0 9px 28px rgba(232,174,70,.18), inset 0 1px 0 rgba(255,255,255,.35);
+      font-size: clamp(13px, 2vw, 19px);
+      font-weight: 800;
+      line-height: 1.25;
+      text-decoration: none;
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    #treadmills-content .tm-enquire:hover {
+      filter: brightness(1.06);
+      transform: translateY(-2px);
+    }
+
+    #treadmills-content .tm-whatsapp {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
+    }
+
+    #treadmills-content .tm-arrow {
+      margin-left: auto;
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    #treadmills-content .tm-enquire-label { flex: 0 1 auto; }
+
+    #treadmills-content .tm-footnote {
+      margin: 8px 0 0;
+      color: #b7b8bb;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 760px) {
+      #treadmills-content { padding-bottom: 24px; }
+      #treadmills-content .tm-hero { height: min(48vw, 590px); max-height: 62vh; }
+      #treadmills-content .tm-content { margin-top: -64px; padding-inline: 28px; }
+      #treadmills-content .tm-card { min-height: 118px; padding: 17px; }
+    }
+
+    @media (max-width: 420px) {
+      #treadmills-content .tm-hero { height: 245px; min-height: 245px; max-height: 34vh; }
+      #treadmills-content .tm-content { margin-top: -36px; padding-inline: 12px; }
+      #treadmills-content .tm-eyebrow { font-size: 8px; letter-spacing: 1.5px; margin-bottom: 6px; padding: 4px 8px; }
+      #treadmills-content .tm-title { font-size: clamp(25px, 7.4vw, 31px); letter-spacing: -.7px; margin-bottom: 5px; }
+      #treadmills-content .tm-intro { font-size: 11px; line-height: 1.35; margin-bottom: 10px; }
+      #treadmills-content .tm-benefits { gap: 7px; margin-bottom: 10px; }
+      #treadmills-content .tm-card {
+        grid-template-columns: 32px minmax(0, 1fr);
+        gap: 7px;
+        min-height: 75px;
+        padding: 9px 7px;
+        border-radius: 12px;
+      }
+      #treadmills-content .tm-check { width: 32px; height: 32px; border-radius: 9px; font-size: 21px; }
+      #treadmills-content .tm-card h3 { font-size: 11px; margin: 0 0 3px; }
+      #treadmills-content .tm-card p { font-size: 9px; line-height: 1.25; }
+      #treadmills-content .tm-enquire { min-height: 45px; gap: 7px; padding: 9px 10px; border-radius: 13px; font-size: 12px; }
+      #treadmills-content .tm-whatsapp { width: 21px; height: 21px; }
+      #treadmills-content .tm-arrow { font-size: 21px; }
+      #treadmills-content .tm-footnote { font-size: 9px; margin-top: 5px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #treadmills-content .tm-enquire { transition: none; }
+    }
+  </style>
+
+  <div class="tm-hero" aria-hidden="true">
+    <img src="images/treadmil.png" alt="">
+  </div>
+
+  <div class="tm-content">
+    <p class="tm-eyebrow">MOVE BETTER. FEEL STRONGER.</p>
+    <h2 class="tm-title" id="tm-title">Find Your <span>Treadmill</span></h2>
+    <p class="tm-intro">
+      Bring your cardio routine home or upgrade your gym with a treadmill suited to your space and workout goals.
+    </p>
+
+    <div class="tm-benefits">
+      <article class="tm-card">
+        <span class="tm-check" aria-hidden="true">✓</span>
+        <div>
+          <h3>Everyday Cardio</h3>
+          <p>Build a walking or running routine at your own pace.</p>
+        </div>
+      </article>
+
+      <article class="tm-card">
+        <span class="tm-check" aria-hidden="true">✓</span>
+        <div>
+          <h3>Home &amp; Gym</h3>
+          <p>Explore options for personal or commercial spaces.</p>
+        </div>
+      </article>
+
+      <article class="tm-card">
+        <span class="tm-check" aria-hidden="true">✓</span>
+        <div>
+          <h3>Compare Options</h3>
+          <p>Ask about size, features and available models.</p>
+        </div>
+      </article>
+
+      <article class="tm-card">
+        <span class="tm-check" aria-hidden="true">✓</span>
+        <div>
+          <h3>Helpful Guidance</h3>
+          <p>Choose based on your space and training needs.</p>
+        </div>
+      </article>
+    </div>
+
+    <a class="tm-enquire"
+       href="https://wa.me/919731233001?text=Hi%2C%20I%27m%20interested%20in%20your%20treadmills.%20Please%20share%20the%20available%20models."
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Enquire about treadmills on WhatsApp">
+      <svg class="tm-whatsapp" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 3.2A12.1 12.1 0 0 0 5.6 21.5L4 28l6.7-1.7A12.1 12.1 0 1 0 16 3.2Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M12.1 10.3c-.4-.8-.8-.8-1.2-.8h-1c-.4 0-.9.2-1.2.7-.4.5-1.6 1.6-1.6 3.8s1.6 4.4 1.8 4.7c.2.3 3.1 5 7.7 6.8 3.8 1.5 4.6 1.2 5.4 1.1.8-.1 2.7-1.1 3.1-2.2.4-1.1.4-2 .3-2.2-.1-.2-.4-.3-.9-.6l-3.1-1.5c-.4-.2-.8-.3-1.1.3-.3.5-1.2 1.5-1.5 1.8-.3.3-.6.4-1.1.1-.5-.2-2.1-.8-4-2.5-1.5-1.3-2.5-3-2.8-3.5-.3-.5 0-.8.2-1.1.2-.2.5-.6.7-.9.2-.3.3-.5.5-.8.2-.3.1-.6 0-.9l-1.2-2.3Z" fill="currentColor" transform="translate(3 1) scale(.82)"/>
+      </svg>
+      <span class="tm-enquire-label">Enquire About Treadmills</span>
+      <span class="tm-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <p class="tm-footnote">Need help choosing? Tell us your budget, available space and workout goals.</p>
+  </div>
+</section>

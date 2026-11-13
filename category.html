@@ -1,0 +1,337 @@
+<!-- Welcare category section fragment: loaded by index.html into #category -->
+<section id="category" class="wc-category" aria-labelledby="wc-category-title">
+  <style>
+    .wc-category {
+      --wc-gold: #ffbd4a;
+      --wc-gold-light: #ffdb88;
+      --wc-bg: #08090a;
+      --wc-panel: #111211;
+      --wc-text: #f8f6f0;
+      --wc-muted: #c8c2b7;
+      width: 100%;
+      padding: 20px 14px 16px;
+      color: var(--wc-text);
+      background:
+        radial-gradient(ellipse at 80% 0%, #40230f 0%, transparent 35%),
+        linear-gradient(180deg, #0b0c0c 0%, #070808 100%);
+      font-family: "DM Sans", "Manrope", Arial, sans-serif;
+      scroll-margin-top: 12px;
+      box-sizing: border-box;
+      border: 3px solid #f7c766;
+      border-top : 1px solid #f7c766;
+      border-bottom : 1px solid #f7c766;
+      border-radius: 15px;
+    }
+    .wc-category *, .wc-category *::before, .wc-category *::after { box-sizing: border-box; }
+    .wc-category-inner { width: 100%; max-width: 390px; margin: 0 auto; }
+    .wc-category-head { margin-bottom: 13px; }
+    .wc-category-eyebrow {
+      margin: 0 0 7px;
+      color: var(--wc-gold);
+      font-size: 8px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .wc-category-title {
+      max-width: 290px;
+      margin: 0;
+      font-family: "Manrope", "DM Sans", Arial, sans-serif;
+      font-size: clamp(27px, 7.2vw, 34px);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: -1.1px;
+    }
+    .wc-category-title span { display: block; color: var(--wc-gold-light); }
+    .wc-category-intro {
+      max-width: 310px;
+      margin: 8px 0 0;
+      color: var(--wc-muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+    .wc-category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+    .wc-category-card {
+      position: relative;
+      display: flex;
+      min-width: 0;
+      min-height: 105px;
+      aspect-ratio: 1.13 / 1;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      padding: 8px;
+      border: 1px solid #9d7a42;
+      border-radius: 11px;
+      color: var(--wc-text);
+      background: linear-gradient(145deg, #1b1b19, #080909 80%);
+      text-decoration: none;
+      isolation: isolate;
+      transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .wc-category-card::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(180deg, #0000 25%, #0009 65%, #000e 100%);
+      content: "";
+      pointer-events: none;
+    }
+    .wc-category-card:focus-visible {
+      outline: 2px solid var(--wc-gold-light);
+      outline-offset: 2px;
+    }
+    .wc-category-card:active { transform: scale(.985); }
+    .wc-category-card:hover {
+      border-color: var(--wc-gold-light);
+      box-shadow: 0 0 14px #ffbd4a18;
+    }
+    .wc-category-card-image {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: linear-gradient(145deg, #1c1c1a, #080909);
+    }
+    .wc-category-card-title {
+      display: block;
+      margin: 0;
+      font-family: "Manrope", "DM Sans", Arial, sans-serif;
+      font-size: clamp(10px, 2.7vw, 12px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      text-shadow: 0 1px 5px #000;
+    }
+    .wc-category-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      width: fit-content;
+      margin-top: 4px;
+      color: var(--wc-gold-light);
+      font-size: 8px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: .15px;
+    }
+    .wc-category-card-link svg { width: 10px; height: 10px; flex: 0 0 auto; }
+    .wc-category-card--service {
+      align-items: flex-start;
+      justify-content: flex-end;
+      background:
+        radial-gradient(ellipse at 50% 34%, #322718 0%, #171512 45%, #090a0a 100%);
+    }
+    .wc-category-service-icon {
+      position: absolute;
+      top: 24%;
+      left: 50%;
+      width: 31px;
+      height: 31px;
+      transform: translateX(-50%);
+      color: var(--wc-gold-light);
+    }
+    .wc-category-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px;
+      border: 1px solid #5b4b31;
+      border-radius: 9px;
+      background: linear-gradient(110deg, #191815, #0d0e0e);
+    }
+    .wc-category-bottom-copy { min-width: 0; }
+    .wc-category-bottom-title {
+      display: block;
+      margin: 0;
+      color: var(--wc-text);
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .wc-category-bottom-text {
+      display: block;
+      margin-top: 3px;
+      color: var(--wc-muted);
+      font-size: 7px;
+      line-height: 1.3;
+    }
+    .wc-category-whatsapp {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-height: 28px;
+      padding: 6px 8px;
+      border: 1px solid var(--wc-gold);
+      border-radius: 7px;
+      color: var(--wc-gold-light);
+      background: #090a0a;
+      font-size: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .wc-category-whatsapp svg { width: 14px; height: 14px; }
+    .wc-category-footer {
+      margin: 9px 0 0;
+      color: #d0c7b7;
+      font-size: 7px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .wc-category-footer strong {
+      display: block;
+      color: var(--wc-gold);
+      font-size: 7px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    @media (max-height: 740px) and (max-width: 600px) {
+      .wc-category { padding-top: 14px; padding-bottom: 12px; }
+      .wc-category-head { margin-bottom: 9px; }
+      .wc-category-title { font-size: clamp(25px, 6.8vw, 30px); }
+      .wc-category-intro { margin-top: 6px; font-size: 9px; }
+      .wc-category-grid { gap: 6px; }
+      .wc-category-card { min-height: 88px; aspect-ratio: 1.2 / 1; padding: 7px; }
+      .wc-category-card-title { font-size: 10px; }
+      .wc-category-card-link { margin-top: 3px; font-size: 7px; }
+      .wc-category-bottom { margin-top: 6px; padding: 6px; }
+      .wc-category-footer { margin-top: 6px; }
+    }
+    @media (max-width: 340px) {
+      .wc-category { padding-inline: 10px; }
+      .wc-category-card { min-height: 82px; padding: 6px; }
+      .wc-category-card-title { font-size: 9px; }
+      .wc-category-bottom { align-items: flex-start; }
+      .wc-category-bottom-title { font-size: 8px; }
+      .wc-category-whatsapp { padding-inline: 6px; font-size: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wc-category-card { transition: none; }
+    }
+  </style>
+
+  <div class="wc-category-inner">
+    <header class="wc-category-head">
+      <p class="wc-category-eyebrow">Our products</p>
+      <h2 class="wc-category-title" id="wc-category-title">Find Your <span>Perfect Fit</span></h2>
+      <p class="wc-category-intro">Explore fitness equipment and solutions for your home, workout space, or commercial gym.</p>
+    </header>
+
+    <nav class="wc-category-grid" aria-label="Fitness equipment categories">
+      <a class="wc-category-card" href="#treadmills" data-category-target="treadmills" aria-label="View treadmills">
+        <img class="wc-category-card-image" src="images/treadmil.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Treadmills</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#spinbikes" data-category-target="spinbikes" aria-label="View spin bikes">
+        <img class="wc-category-card-image" src="images/spinbikes.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Spin Bikes</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#ellipticals" data-category-target="ellipticals" aria-label="View ellipticals">
+        <img class="wc-category-card-image" src="images/elleptical.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Ellipticals</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#homegym" data-category-target="homegym" aria-label="View home gym machines">
+        <img class="wc-category-card-image" src="images/homegym.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Home Gym Machines</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#homegymsetup" data-category-target="homegymsetup" aria-label="View home gym setup">
+        <img class="wc-category-card-image" src="images/homegymsetup.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Home Gym Setup</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#completegymsetup" data-category-target="completegymsetup" aria-label="View full gym setup">
+        <img class="wc-category-card-image" src="images/fullgym.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Full Gym Setup</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card" href="#accessories" data-category-target="accessories" aria-label="View accessories">
+        <img class="wc-category-card-image" src="images/accessories.png" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="wc-category-card-title">Accessories</span>
+        <span class="wc-category-card-link">View Details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9M8 4l4 4-4 4"/></svg></span>
+      </a>
+
+      <a class="wc-category-card wc-category-card--service"
+   href="#service"
+   data-category-target="service"
+   aria-label="View service and support">
+
+  <img class="wc-category-card-image"
+       src="images/service.png"
+       alt="Service and Support"
+       loading="lazy"
+       onerror="this.style.display='none'">
+
+  <span class="wc-category-card-title">Service &amp; Support</span>
+
+  <span class="wc-category-card-link">
+    Request Service
+    <svg viewBox="0 0 16 16" fill="none"
+         stroke="currentColor"
+         stroke-width="1.8"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         aria-hidden="true">
+      <path d="M3 8h9M8 4l4 4-4 4"/>
+    </svg>
+  </span>
+
+</a>
+    </nav>
+
+    <div class="wc-category-bottom">
+      <div class="wc-category-bottom-copy">
+        <span class="wc-category-bottom-title">Not sure what you need?</span>
+        <span class="wc-category-bottom-text">Tell us your goal and we'll help you choose.</span>
+      </div>
+      <a class="wc-category-whatsapp" href="https://wa.me/919731233001?text=Hi%20Welcare%2C%20I%20would%20like%20to%20know%20more%20about%20your%20fitness%20equipment." target="_blank" rel="noopener noreferrer" aria-label="Ask Welcare on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 11.6a8.2 8.2 0 0 1-12.1 7.2L3 20l1.3-4.8a8.2 8.2 0 1 1 15.9-3.6Z"/><path d="M8.7 8.4c.2 1.9 2.2 4.2 4.1 4.8l1.2-1.1 2 1c-.1 1.4-.9 2.1-2.3 2-3.2-.5-5.9-3.2-6.5-6.3-.2-1.3.5-2.1 1.7-2.3l.9 1.9Z"/></svg>
+        Ask on WhatsApp
+      </a>
+    </div>
+
+    <p class="wc-category-footer"><strong>Welcare Fitness Equipments</strong>Build stronger. Train smarter.</p>
+  </div>
+
+  <script>
+    (() => {
+      const section = document.currentScript?.closest('.wc-category') || document.querySelector('.wc-category');
+      if (!section || section.dataset.categoryWired === 'true') return;
+      section.dataset.categoryWired = 'true';
+
+      section.querySelectorAll('[data-category-target]').forEach(card => {
+        card.addEventListener('click', event => {
+          const targetId = card.getAttribute('data-category-target');
+          const target = document.getElementById(targetId);
+          if (!target) return;
+          event.preventDefault();
+          history.replaceState(null, '', `#${targetId}`);
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+  </script>
+</section>

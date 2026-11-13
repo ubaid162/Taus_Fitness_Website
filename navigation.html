@@ -1,0 +1,355 @@
+<!-- Welcare Fitness Equipments: shared navigation drawer fragment.
+     Loaded by index.html into #shared-navigation. Keep this as a fragment,
+     not a complete HTML document. -->
+<style>
+  #welcare-navigation {
+    --nav-gold: #e9bd61;
+    --nav-gold-bright: #ffd982;
+    --nav-white: #f7f5f0;
+    --nav-muted: #b9b7b0;
+    font-family: "DM Sans", Arial, sans-serif;
+  }
+  #welcare-navigation * { box-sizing: border-box; }
+  #welcare-navigation .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, .76);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .25s ease, visibility .25s ease;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+  #welcare-navigation .drawer-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  #welcare-navigation .site-drawer {
+    position: fixed;
+    z-index: 9999;
+    inset: 0 auto 0 0;
+    width: min(100%, 340px);
+    height: 100%;
+    height: 100dvh;
+    padding: max(24px, env(safe-area-inset-top)) 24px max(22px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    color: var(--nav-white);
+    background:
+      radial-gradient(ellipse at 8% 0%, rgba(184, 135, 54, .10), transparent 42%),
+      linear-gradient(160deg, #080909 0%, #050606 70%, #090a0a 100%);
+    border-right: 1px solid rgba(233, 189, 97, .28);
+    box-shadow: 20px 0 65px rgba(0, 0, 0, .48), inset -1px 0 rgba(255,255,255,.025);
+    transform: translateX(-105%);
+    visibility: hidden;
+    transition: transform .3s cubic-bezier(.2,.75,.25,1), visibility .3s;
+    outline: none;
+  }
+  #welcare-navigation .site-drawer.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  #welcare-navigation .drawer-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 54px;
+    padding-bottom: 19px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  #welcare-navigation .drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    flex: 1;
+  }
+  #welcare-navigation .drawer-brand-mark {
+    display: block;
+    width: 43px;
+    height: 35px;
+    flex: 0 0 auto;
+    color: var(--nav-gold-bright);
+    filter: drop-shadow(0 0 7px rgba(233,189,97,.15));
+  }
+  #welcare-navigation .drawer-brand-name {
+    display: block;
+    color: #f8f7f3;
+    font-family: Manrope, "DM Sans", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: .3px;
+    white-space: nowrap;
+  }
+  #welcare-navigation .drawer-brand-subtitle {
+    display: block;
+    margin-top: 5px;
+    color: #d8d1c2;
+    font-size: 7px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 2.1px;
+    white-space: nowrap;
+  }
+  #welcare-navigation .drawer-close {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: #eeeae1;
+    background: transparent;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  #welcare-navigation .drawer-close:hover {
+    color: var(--nav-gold-bright);
+    border-color: rgba(233,189,97,.25);
+    background: rgba(233,189,97,.06);
+  }
+  #welcare-navigation .drawer-close svg { width: 23px; height: 23px; }
+  #welcare-navigation .drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 17px 0 18px;
+  }
+  #welcare-navigation .drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 36px;
+    padding: 6px 8px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: #e9e7e1;
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  #welcare-navigation .drawer-link:hover,
+  #welcare-navigation .drawer-link:focus-visible {
+    color: #fff;
+    background: rgba(233,189,97,.075);
+    border-color: rgba(233,189,97,.18);
+    outline: none;
+  }
+  #welcare-navigation .drawer-link:active { transform: scale(.99); }
+  #welcare-navigation .drawer-link-icon {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    color: var(--nav-gold-bright);
+  }
+  #welcare-navigation .drawer-link-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  #welcare-navigation .drawer-link-label { flex: 1; }
+  #welcare-navigation .drawer-bottom {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  #welcare-navigation .drawer-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 16px;
+    border: 1.5px solid #d9ad43;
+    border-radius: 12px;
+    color: #f3d68b;
+    background: linear-gradient(180deg, rgba(233,189,97,.055), rgba(233,189,97,.015));
+    box-shadow: inset 0 0 0 1px rgba(233,189,97,.08), 0 0 20px rgba(233,189,97,.035);
+    font-family: "DM Sans", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .15px;
+    text-decoration: none;
+    transition: background .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+  }
+  #welcare-navigation .drawer-whatsapp:hover,
+  #welcare-navigation .drawer-whatsapp:focus-visible {
+    color: #fff0c5;
+    background: rgba(233,189,97,.12);
+    box-shadow: 0 0 22px rgba(233,189,97,.12), inset 0 0 0 1px rgba(233,189,97,.16);
+    outline: none;
+  }
+  #welcare-navigation .drawer-whatsapp:active { transform: scale(.99); }
+  #welcare-navigation .drawer-whatsapp svg { width: 23px; height: 23px; flex: 0 0 auto; }
+  #welcare-navigation .drawer-note {
+    margin: 12px 0 0;
+    color: #77766f;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  @media (max-height: 680px) {
+    #welcare-navigation .site-drawer { padding-top: max(14px, env(safe-area-inset-top)); padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+    #welcare-navigation .drawer-header { padding-bottom: 12px; }
+    #welcare-navigation .drawer-links { gap: 0; padding: 10px 0 12px; }
+    #welcare-navigation .drawer-link { min-height: 32px; padding-block: 4px; }
+    #welcare-navigation .drawer-bottom { padding-top: 8px; }
+  }
+  @media (min-width: 700px) {
+    #welcare-navigation .site-drawer { width: min(86vw, 360px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #welcare-navigation *, #welcare-navigation *::before, #welcare-navigation *::after { transition-duration: .01ms !important; }
+  }
+</style>
+
+<div id="welcare-navigation">
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <aside class="site-drawer" id="siteDrawer" role="dialog" aria-modal="true" aria-label="Welcare navigation" aria-hidden="true" inert tabindex="-1">
+    <div class="drawer-header">
+      <a class="drawer-brand" href="#home" data-nav-target="home" aria-label="Welcare Fitness Equipments home">
+        <img
+          class="drawer-brand-mark"
+          src="images/welcare-gold-mark.png"
+          alt="Welcare Fitness Equipments logo"
+        >
+        <span>
+          <span class="drawer-brand-name ">WELCARE</span>
+          <span class="drawer-brand-subtitle">FITNESS EQUIPMENTS</span>
+        </span>
+      </a>
+      <button class="drawer-close" id="menuClose" type="button" aria-label="Close navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <nav class="drawer-links" aria-label="Website sections">
+      <a class="drawer-link" href="#home" data-nav-target="home">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5.5 9v11h5.2v-6h2.6v6h5.2V9"/></svg></span><span class="drawer-link-label">Home</span>
+      </a>
+      <a class="drawer-link" href="#treadmills" data-nav-target="treadmills">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="15.5" cy="4.5" r="2"/><path d="m13.7 7.5-3 4 3.2 2.1 2.4-3 2.2 2.5 3.2.3M10.7 11.5l-4 2.2-2.1 4.2M13.9 13.6l-2.1 5.2M4 20h17M8.5 17.5l-2.3 2.5"/></svg></span><span class="drawer-link-label">Treadmills</span>
+      </a>
+      <a class="drawer-link" href="#spinbikes" data-nav-target="spinbikes">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="17" r="3.2"/><circle cx="18" cy="17" r="3.2"/><path d="m6 17 4.2-7h4.2l3.6 7M10.2 10 7.5 7H5M13.2 10l2.2-3H18M10.2 10 13 17H6"/><path d="M10 6h2"/></svg></span><span class="drawer-link-label">Spin Bikes</span>
+      </a>
+      <a class="drawer-link" href="#ellipticals" data-nav-target="ellipticals">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="m10.5 7-2.7 4.2 3.1 2.3 2.8-3.2 2.5 2.2M8 11.2l-3.3 1.4-1.1 4.2M11 13.5l-1.2 5.1M14 10.3l2.1-3.1 3.3.2M15.2 13l2.8 5.6M7 20h12"/></svg></span><span class="drawer-link-label">Ellipticals</span>
+      </a>
+      <a class="drawer-link" href="#homegym" data-nav-target="homegym">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V5h3v15M17 20V5h3v15M4 8h16M4 16h16M7 11h10M7 13h10"/><path d="M10 5V3h4v2M9 20v-4m6 4v-4"/></svg></span><span class="drawer-link-label">Home Gym Machines</span>
+      </a>
+      <a class="drawer-link" href="#homegymsetup" data-nav-target="homegymsetup">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5.5 9v11h13V9M9 20v-6h6v6"/><path d="M2.5 10.5 12 3l9.5 7.5"/></svg></span><span class="drawer-link-label">Home Gym Setup</span>
+      </a>
+      <a class="drawer-link" href="#completegymsetup" data-nav-target="completegymsetup">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h6v13H4zM14 7h6v13h-6zM7 7V4a2 2 0 0 1 4 0v3M13 7V4a2 2 0 0 1 4 0v3"/><path d="M6 11h2m8 0h2M6 15h2m8 0h2"/></svg></span><span class="drawer-link-label">Full Gym Setup</span>
+      </a>
+      <a class="drawer-link" href="#accessories" data-nav-target="accessories">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6M6 7v10M9 10v4M15 10v4M18 7v10M21 9v6M6 12h12"/></svg></span><span class="drawer-link-label">Accessories</span>
+      </a>
+      <a class="drawer-link" href="#service" data-nav-target="service">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a5 5 0 0 0-6.7 6.7L3 18l3 3 4.8-4.8a5 5 0 0 0 6.7-6.7l-3.1 3.1-3-3 3.1-3.1Z"/><path d="m14 4 2-2 6 6-2 2"/></svg></span><span class="drawer-link-label">Service &amp; Support</span>
+      </a>
+      <a class="drawer-link" href="#about" data-nav-target="about">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg></span><span class="drawer-link-label">About Us</span>
+      </a>
+      <a class="drawer-link" href="#contact" data-nav-target="contact">
+        <span class="drawer-link-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span class="drawer-link-label">Contact Us</span>
+      </a>
+    </nav>
+
+    <div class="drawer-bottom">
+      <a class="drawer-whatsapp" href="https://wa.me/919731233001?text=Hi%20Welcare%2C%20I%20would%20like%20to%20know%20more%20about%20your%20fitness%20equipment." target="_blank" rel="noopener noreferrer" aria-label="Chat with Welcare on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 11.8a8.2 8.2 0 0 1-12.1 7.1L3 20l1.2-4.8a8.2 8.2 0 1 1 16-3.4Z"/><path d="M8.3 7.8c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4-.1.6l-.6.8c-.2.2-.2.4 0 .6.5.9 1.3 1.6 2.2 2.1.2.1.4.1.6-.1l.8-.9c.2-.2.4-.2.6-.1l1.7.8c.3.1.4.3.4.5 0 .3-.2 1.1-.7 1.5-.5.5-1.1.7-1.8.6-1-.1-2.2-.7-3.5-1.8-1.6-1.4-2.7-3.1-2.8-4.1-.1-.7.1-1.4.6-2.2Z"/></svg>
+        <span>WhatsApp Us</span>
+      </a>
+      <p class="drawer-note">Premium Quality · Trusted Service</p>
+    </div>
+  </aside>
+</div>
+
+<script>
+  (() => {
+    const root = document.getElementById('welcare-navigation');
+    if (!root || root.dataset.navigationReady === 'true') return;
+    root.dataset.navigationReady = 'true';
+
+    const overlay = root.querySelector('#drawerOverlay');
+    const drawer = root.querySelector('#siteDrawer');
+    const closeButton = root.querySelector('#menuClose');
+    const openButton = document.getElementById('menuOpen');
+    if (!overlay || !drawer || !closeButton || !openButton) return;
+
+    let previousFocus = null;
+    const openDrawer = () => {
+      previousFocus = document.activeElement;
+      overlay.classList.add('is-open');
+      drawer.classList.add('is-open');
+      overlay.setAttribute('aria-hidden', 'false');
+      drawer.setAttribute('aria-hidden', 'false');
+      drawer.removeAttribute('inert');
+      document.body.style.overflow = 'hidden';
+      openButton.setAttribute('aria-expanded', 'true');
+      closeButton.focus();
+    };
+    const closeDrawer = () => {
+      overlay.classList.remove('is-open');
+      drawer.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+      drawer.setAttribute('aria-hidden', 'true');
+      drawer.setAttribute('inert', '');
+      document.body.style.overflow = '';
+      openButton.setAttribute('aria-expanded', 'false');
+      if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+    };
+
+    openButton.addEventListener('click', openDrawer);
+    closeButton.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', event => event.stopPropagation());
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+      if (event.key === 'Tab' && drawer.classList.contains('is-open')) {
+        const focusable = [...drawer.querySelectorAll('a[href], button:not([disabled])')];
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+
+    drawer.querySelectorAll('[data-nav-target]').forEach(link => {
+      link.addEventListener('click', event => {
+        const targetId = link.getAttribute('data-nav-target');
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        event.preventDefault();
+        closeDrawer();
+        history.replaceState(null, '', `#${targetId}`);
+        target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+  })();
+</script>

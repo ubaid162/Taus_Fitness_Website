@@ -1,0 +1,102 @@
+<section id="spinbike-content" aria-labelledby="spinbike-title">
+<style>
+#spinbike-content {
+  --sb-gold:#f7c766; --sb-white:#fffaf0; --sb-muted:#e0dbd0;
+  position:relative; isolation:isolate; display:flex; flex-direction:column;
+  justify-content:space-between; align-items:center; width:100%; min-height:100svh;
+  box-sizing:border-box; overflow:hidden;
+  padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
+  border: 3px solid #f7c766;
+      border-top : 1px solid #f7c766;
+      border-bottom : 1px solid #f7c766;
+      border-radius: 15px;
+  color:var(--sb-white); text-align:center; font-family:Arial,Helvetica,sans-serif;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.0) 30%,rgba(0,0,0,.20) 50%,rgba(0,0,0,.50) 60%,rgba(0,0,0,.90) 80%),
+    url("images/spinbikes.png") center 10% / 120% auto no-repeat;
+  background-color:#080808;
+}
+#spinbike-content *,#spinbike-content *::before,#spinbike-content *::after{box-sizing:border-box}
+#spinbike-content .sb-top{width:100%;display:flex;justify-content:center;align-items:center;margin:0}
+#spinbike-content .sb-brand-name{
+  display:inline-block;padding:10px 24px;background:rgba(0,0,0,.35);
+  border:1px solid rgba(247,199,102,.75);border-radius:6px;
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)
+}
+#spinbike-content .sb-brand-name h2{
+  margin:0;color:#fff;font-size:clamp(27px,8vw,36px);line-height:1.05;
+  font-weight:900;letter-spacing:1px
+}
+#spinbike-content .sb-main{
+  width:100%;max-width:430px;margin-top:auto;margin-bottom:0;padding:12px 0 10px;
+  text-shadow:0 2px 12px rgba(0,0,0,.7)
+}
+#spinbike-content .sb-tagline{margin:0 0 9px;color:var(--sb-gold);font-size:15px;line-height:1.3;font-weight:700}
+#spinbike-content .sb-intro{max-width:340px;margin:0 auto;color:var(--sb-muted);font-size:12px;line-height:1.6}
+#spinbike-content .sb-benefits{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;
+  width:100%;max-width:390px;margin:18px auto 0
+}
+#spinbike-content .sb-benefit{
+  min-width:0;padding:10px 5px;border:1px solid rgba(247,199,102,.55);
+  border-radius:9px;background:rgba(0,0,0,.58);
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)
+}
+#spinbike-content .sb-benefit strong{display:block;color:var(--sb-white);font-size:10px;line-height:1.25;font-weight:800}
+#spinbike-content .sb-benefit span{display:block;margin-top:4px;color:var(--sb-muted);font-size:8px;line-height:1.35}
+#spinbike-content .sb-bottom{width:100%;max-width:430px;margin-top:10px}
+#spinbike-content .sb-cta-title{margin:0 0 6px;color:var(--sb-white);font-size:17px;line-height:1.2;font-weight:800}
+#spinbike-content .sb-note{margin:0 auto 12px;color:var(--sb-muted);font-size:10px;line-height:1.45}
+#spinbike-content .sb-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;max-width:320px;
+  min-height:45px;padding:12px 18px;border:1px solid #ffe0a0;border-radius:999px;color:#15110a;
+  background:linear-gradient(135deg,#ffe3a3,#d5a64f);
+  box-shadow:0 7px 24px rgba(0,0,0,.35),0 0 18px rgba(247,199,102,.2);
+  text-decoration:none;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:1px;
+  transition:transform .2s ease,filter .2s ease
+}
+#spinbike-content .sb-cta:active{transform:scale(.98)}
+#spinbike-content .sb-cta svg{width:18px;height:18px;flex:0 0 auto}
+#spinbike-content .sb-footer{margin:12px 0 0;color:rgba(255,250,240,.72);font-size:8px;letter-spacing:1.7px}
+@media(max-height:700px){
+  #spinbike-content{padding-top:12px;padding-bottom:12px}
+  #spinbike-content .sb-main{padding:5px 0 6px}
+  #spinbike-content .sb-tagline{margin:8px 0}
+  #spinbike-content .sb-benefits{margin-top:12px}
+  #spinbike-content .sb-bottom{margin-top:6px}
+  #spinbike-content .sb-footer{margin-top:8px}
+}
+@media(max-width:340px){
+  #spinbike-content{padding-left:12px;padding-right:12px}
+  #spinbike-content .sb-brand-name{padding:9px 18px}
+  #spinbike-content .sb-benefits{gap:5px}
+  #spinbike-content .sb-benefit{padding:9px 3px}
+  #spinbike-content .sb-benefit strong{font-size:9px}
+  #spinbike-content .sb-benefit span{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){#spinbike-content .sb-cta{transition:none}}
+</style>
+
+<div class="sb-top">
+  <div class="sb-brand-name"><h2 id="spinbike-title">SPIN BIKE</h2></div>
+</div>
+
+<div class="sb-main">
+  <p class="sb-tagline">Ride Strong. Train Smarter.</p>
+  <p class="sb-intro">Bring the energy of indoor cycling to your home or gym with a spin bike that suits your space and fitness goals.</p>
+  <div class="sb-benefits">
+    <div class="sb-benefit"><strong>INDOOR CYCLING</strong><span>Focused cardio workouts</span></div>
+    <div class="sb-benefit"><strong>HOME &amp; GYM</strong><span>Options for every space</span></div>
+    <div class="sb-benefit"><strong>EXPERT HELP</strong><span>Guidance from our team</span></div>
+  </div>
+</div>
+
+<div class="sb-bottom">
+  <h3 class="sb-cta-title">Find Your Perfect Ride</h3>
+  <p class="sb-note">Ask us about available models, resistance, adjustability and pricing.</p>
+  <a class="sb-cta" href="https://wa.me/919731233001?text=Hello%20Welcare%20Fitness%20Equipments%2C%20I%27m%20interested%20in%20spin%20bikes.%20Please%20share%20available%20models%2C%20specifications%20and%20pricing." target="_blank" rel="noopener noreferrer" aria-label="Enquire about spin bikes on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.78 11.78 0 0 0 12.13 0C5.6 0 .28 5.31.28 11.85c0 2.09.55 4.13 1.59 5.93L.18 24l6.37-1.67a11.9 11.9 0 0 0 5.58 1.42h.01c6.53 0 11.85-5.32 11.85-11.85 0-3.17-1.23-6.15-3.47-8.42ZM12.14 21.7a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.78.99 1.01-3.69-.23-.38a9.82 9.82 0 0 1-1.51-5.18c0-5.45 4.44-9.89 9.9-9.89a9.82 9.82 0 0 1 7 2.9 9.82 9.82 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.41c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.67-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.5 1.7.64.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+    Enquire on WhatsApp
+  </a>
+</div>
+</section>
